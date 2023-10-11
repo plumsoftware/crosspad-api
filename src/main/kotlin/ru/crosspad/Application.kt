@@ -4,6 +4,9 @@ import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import org.jetbrains.exposed.sql.Database
+import ru.crosspad.features.login.configureLoginRouting
+import ru.crosspad.features.note.configureNotesRouting
+import ru.crosspad.features.register.configureRegisterRouting
 import ru.crosspad.plugins.*
 
 fun main() {
@@ -15,5 +18,9 @@ fun main() {
 }
 
 fun Application.module() {
+    configureSerialization()
+    configureLoginRouting()
+    configureRegisterRouting()
+    configureNotesRouting()
     configureRouting()
 }
