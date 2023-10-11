@@ -28,13 +28,13 @@ dependencies {
     implementation("io.ktor:ktor-server-core-jvm")
     implementation("io.ktor:ktor-server-content-negotiation-jvm")
     implementation("io.ktor:ktor-server-netty-jvm")
-    implementation("ch.qos.logback:logback-classic:$logback_version")
-    implementation("org.slf4j:slf4j-api:$slf4j_version")
+    implementation("ch.qos.logback:logback-classic:1.4.11")
+    implementation("org.slf4j:slf4j-api:2.0.9")
 
     implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.5")
 
     testImplementation("io.ktor:ktor-server-tests-jvm")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.9.10")
 
     implementation("org.postgresql:postgresql:42.2.2")
     implementation("org.jetbrains.exposed:exposed-core:0.37.3")
