@@ -24,30 +24,10 @@ object Notes : Table("notes") {
         }
     }
 
-    fun fetchAll(): List<NotesDTO> {
-        return try {
-            transaction {
-                Notes.selectAll().toList()
-                    .map {
-                        NotesDTO(
-                            noteId = it[noteId],
-                            title = it[title],
-                            entry = it[entry],
-                            color = it[color],
-                            email = it[email],
-                            date = it[date]
-                        )
-                    }
-            }
-        } catch (e: Exception) {
-            emptyList()
-        }
-    }
-
     fun fetchAllByEmail(emailSearch: String): List<NotesDTO> {
         return try {
             transaction {
-                Notes.select { Notes.email eq emailSearch }.toList()
+                Notes.select { email eq emailSearch }.toList()
                     .map {
                         NotesDTO(
                             noteId = it[noteId],
@@ -67,7 +47,7 @@ object Notes : Table("notes") {
     fun fetchAllByTitle(titleSearch: String, emailSearch: String): List<NotesDTO> {
         return try {
             transaction {
-                Notes.select { (Notes.email eq emailSearch) and (Notes.title eq titleSearch) }.toList()
+                Notes.select { (email eq emailSearch) and (title eq titleSearch) }.toList()
                     .map {
                         NotesDTO(
                             noteId = it[noteId],
