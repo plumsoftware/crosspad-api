@@ -26,8 +26,8 @@ object Tokens : Table("tokens") {
                     .map {
                         TokenDTO(
                             id = it[Tokens.id],
-                            email = it[Tokens.email],
-                            token = it[Tokens.token]
+                            email = it[email],
+                            token = it[token]
                         )
                     }
             }
@@ -39,12 +39,12 @@ object Tokens : Table("tokens") {
     fun fetchEmailByToken(tokenSearch: String): List<TokenDTO> {
         return try {
             transaction {
-                Tokens.select { Tokens.token eq tokenSearch }.toList()
+                Tokens.select { token eq tokenSearch }.toList()
                     .map {
                         TokenDTO(
                             id = it[Tokens.id],
-                            token = it[Tokens.token],
-                            email = it[Tokens.email]
+                            token = it[token],
+                            email = it[email]
                         )
                     }
             }

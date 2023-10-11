@@ -24,7 +24,7 @@ object Users : Table("users") {
                 val userModel = Users.select { Users.email.eq(email) }.single()
                 UserDTO(
                     email = userModel[Users.email],
-                    password = userModel[Users.password]
+                    password = userModel[password]
                 )
             }
         } catch (e: Exception) {
