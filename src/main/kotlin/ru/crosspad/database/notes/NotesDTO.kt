@@ -5,7 +5,7 @@ import ru.crosspad.features.note.models.CreateNoteRequest
 import ru.crosspad.features.note.models.CreateNoteResponse
 
 @Serializable
-data class NotesDTO (
+data class NotesDTO(
     val noteId: Int,
     val title: String,
     val entry: String,

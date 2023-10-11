@@ -3,7 +3,7 @@ package ru.crosspad.features.login
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class LoginReceiveRemote (
+data class LoginReceiveRemote(
     val email: String,
     val password: String
 )

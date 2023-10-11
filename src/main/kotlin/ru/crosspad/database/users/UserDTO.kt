@@ -1,6 +1,6 @@
 package ru.crosspad.database.users
 
-class UserDTO (
+class UserDTO(
     val email: String,
     val password: String
 )

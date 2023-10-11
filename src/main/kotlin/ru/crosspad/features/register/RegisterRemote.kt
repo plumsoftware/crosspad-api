@@ -3,7 +3,7 @@ package ru.crosspad.features.register
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class RegisterReciteRemote (
+data class RegisterReciteRemote(
     val email: String,
     val password: String
 )

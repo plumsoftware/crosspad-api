@@ -1,6 +1,6 @@
 package ru.crosspad.database.tokens
 
-class TokenDTO (
+class TokenDTO(
     val id: Int,
     val email: String,
     val token: String

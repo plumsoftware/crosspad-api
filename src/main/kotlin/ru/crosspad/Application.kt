@@ -7,11 +7,14 @@ import org.jetbrains.exposed.sql.Database
 import ru.crosspad.features.login.configureLoginRouting
 import ru.crosspad.features.note.configureNotesRouting
 import ru.crosspad.features.register.configureRegisterRouting
-import ru.crosspad.plugins.*
+import ru.crosspad.plugins.configureRouting
+import ru.crosspad.plugins.configureSerialization
 
 fun main() {
-    Database.connect("jdbc:postgresql://localhost:5432/crosspad",
-        "org.postgresql.Driver", "postgres", "root")
+    Database.connect(
+        "jdbc:postgresql://localhost:5432/crosspad",
+        "org.postgresql.Driver", "postgres", "root"
+    )
 
     embeddedServer(Netty, port = 8080, host = "0.0.0.0", module = Application::module)
         .start(wait = true)

@@ -88,8 +88,8 @@ object Notes : Table("notes") {
         var lastId = 0
 
         transaction {
-            val result = Notes.slice(Notes.noteId.max()).select { Notes.noteId.isNotNull() }.singleOrNull()
-            lastId = result?.get(Notes.noteId.max()) as? Int ?: 0
+            val result = Notes.slice(noteId.max()).select { noteId.isNotNull() }.singleOrNull()
+            lastId = result?.get(noteId.max()) as? Int ?: 0
         }
 
         return lastId
