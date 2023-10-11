@@ -6,13 +6,3 @@ import kotlinx.serialization.Serializable
 data class SearchNoteRequest(
     val title: String,
 )
-
-@Serializable
-data class SearchNoteResponse(
-    val noteId: Int,
-    val title: String,
-    val entry: String,
-    val color: String,
-    val email: String,
-    val date: String
-)
