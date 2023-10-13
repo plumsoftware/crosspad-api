@@ -1,0 +1,6 @@
+/register
+/login
+
+/notes
+/notes/create
+/notes/search
