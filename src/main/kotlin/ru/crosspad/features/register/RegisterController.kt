@@ -16,7 +16,7 @@ import java.util.*
 class RegisterController(private val call: ApplicationCall) {
 
     suspend fun registerNewUser() {
-        val registerReceiveRemote = call.receive<RegisterReciteRemote>()
+        val registerReceiveRemote = call.receive<RegisterReceiveRemote>()
         if (!registerReceiveRemote.email.isValidEmail()) {
             call.respond(HttpStatusCode.BadRequest, "Email is not valid")
         }
