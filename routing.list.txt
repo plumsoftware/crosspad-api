@@ -11,5 +11,7 @@ POST { "title"(50), "entry"(3000), "color"(8) } TOKEN - answer ()
 /notes/search
 POST { "title"(50) } TOKEN - answer (notes list { "id", "title", "entry", "color", "email", "date" })
 
+/password
+GET { } TOKEN - answer { "email" }
 /password/create
 POST { "oldPassword", "newPassword" }
