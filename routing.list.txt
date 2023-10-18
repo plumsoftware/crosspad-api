@@ -1,6 +1,12 @@
 /register
+POST { "email"(100), "password"(100) } - answer (TOKEN)
 /login
+POST { "email"(100), "password"(100) } - answer (TOKEN)
+
 
 /notes
+GET { } TOKEN - answer (notes list { "id", "title", "entry", "color", "email", "date" })
 /notes/create
+POST { "title"(50), "entry"(3000), "color"(8) } TOKEN - answer ()
 /notes/search
+POST { "title"(50) } TOKEN - answer (notes list { "id", "title", "entry", "color", "email", "date" })
