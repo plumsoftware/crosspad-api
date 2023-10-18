@@ -25,30 +25,32 @@ class RegisterController(private val call: ApplicationCall) {
 
         if (userDTO != null) {
             call.respond(HttpStatusCode.Conflict, "Email is already in use")
-        } else {
-            val token = UUID.randomUUID().toString()
-            val hashedPassword = hashPassword(registerReceiveRemote.password)
+            return
+        }
 
-            try {
-                Users.insert(
-                    UserDTO(
-                        email = registerReceiveRemote.email,
-                        password = hashedPassword
-                    )
-                )
-            } catch (e: ExposedSQLException) {
-                call.respond(HttpStatusCode.Conflict, "Email is already in use")
-            }
+        val token = UUID.randomUUID().toString()
+        val hashedPassword = hashPassword(registerReceiveRemote.password)
 
-            Tokens.insert(
-                TokenDTO(
-                    id = Tokens.getLastIdFromDatabase() + 1,
+        try {
+            Users.insert(
+                UserDTO(
                     email = registerReceiveRemote.email,
-                    token = token
+                    password = hashedPassword
                 )
             )
-
-            call.respond(RegisterResponseRemote(token = token))
+        } catch (e: ExposedSQLException) {
+            call.respond(HttpStatusCode.Conflict, "Email is already in use")
         }
+
+        Tokens.insert(
+            TokenDTO(
+                id = Tokens.getLastIdFromDatabase() + 1,
+                email = registerReceiveRemote.email,
+                token = token
+            )
+        )
+
+        call.respond(RegisterResponseRemote(token = token))
+
     }
 }

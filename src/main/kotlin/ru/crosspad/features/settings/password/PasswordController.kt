@@ -16,24 +16,24 @@ class PasswordController(private val call: ApplicationCall) {
         val request = call.receive<ChangePasswordRequest>()
         val token = call.request.headers["Authorization"]
 
-        if (TokenCheck.isTokenValid(token.orEmpty())) {
-            val oldPassword = request.oldPassword
-            val newPassword = request.newPassword
-
-            val email = Tokens.fetchEmailByToken(token!!).get(0).email
-            val password = Users.getPasswordByEmail(email)
-
-            val hashedPassword = hashPassword(newPassword)
-            if (checkPassword(oldPassword, password!!)) {
-                Users.passwordChange(email, hashedPassword)
-
-                call.respond(HttpStatusCode.OK)
-            } else {
-                call.respond(HttpStatusCode.Unauthorized, "Passwords don't match")
-            }
-
-        } else {
+        if (!TokenCheck.isTokenValid(token.orEmpty())) {
             call.respond(HttpStatusCode.Unauthorized, "Token expired")
+            return
         }
+
+        val oldPassword = request.oldPassword
+        val newPassword = request.newPassword
+
+        val email = Tokens.fetchEmailByToken(token!!).get(0).email
+        val password = Users.getPasswordByEmail(email)
+
+        val hashedPassword = hashPassword(newPassword)
+        if (!checkPassword(oldPassword, password!!)) {
+            call.respond(HttpStatusCode.Unauthorized, "Passwords don't match")
+            return
+        }
+
+        Users.passwordChange(email, hashedPassword)
+        call.respond(HttpStatusCode.OK)
     }
 }
