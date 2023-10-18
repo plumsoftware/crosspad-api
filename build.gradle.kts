@@ -36,7 +36,6 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.9.10")
 
     implementation("org.postgresql:postgresql:42.2.27")
-    implementation("org.jetbrains.exposed:exposed:0.37.3")
     implementation("org.jetbrains.exposed:exposed-core:0.37.3")
     implementation("org.jetbrains.exposed:exposed-dao:0.37.3")
     implementation("org.jetbrains.exposed:exposed-jdbc:0.37.3")
