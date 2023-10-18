@@ -6,8 +6,9 @@ import io.ktor.server.netty.*
 import org.jetbrains.exposed.sql.Database
 import ru.crosspad.features.login.configureLoginRouting
 import ru.crosspad.features.note.configureNotesRouting
-import ru.crosspad.features.password.configurePasswordRouting
+import ru.crosspad.features.settings.password.configurePasswordRouting
 import ru.crosspad.features.register.configureRegisterRouting
+import ru.crosspad.features.settings.configureSettingsRouting
 import ru.crosspad.plugins.configureRouting
 import ru.crosspad.plugins.configureSerialization
 
@@ -18,7 +19,7 @@ fun main() {
     )
 
 
-    embeddedServer(Netty, port = 8085, host = "0.0.0.0", module = Application::module)
+    embeddedServer(Netty, port = 8080, host = "0.0.0.0", module = Application::module)
         .start(wait = true)
 }
 
@@ -27,6 +28,7 @@ fun Application.module() {
     configureLoginRouting()
     configureRegisterRouting()
     configureNotesRouting()
+    configureSettingsRouting()
     configurePasswordRouting()
     configureRouting()
 }

@@ -24,9 +24,10 @@ class NotesController(private val call: ApplicationCall) {
                 Tokens.fetchEmailByToken(token!!).get(0).email
             )
             call.respond(noteDTO)
-        } else {
-            call.respond(HttpStatusCode.Unauthorized, "Token expired")
+            return
         }
+
+        call.respond(HttpStatusCode.Unauthorized, "Token expired")
     }
 
     suspend fun createNote() {
@@ -38,9 +39,10 @@ class NotesController(private val call: ApplicationCall) {
             note.email = Tokens.fetchEmailByToken(token!!).get(0).email
             Notes.insert(note)
             call.respond(note.mapToCreateNoteResponse())
-        } else {
-            call.respond(HttpStatusCode.Unauthorized, "Token expired")
+            return
         }
+
+        call.respond(HttpStatusCode.Unauthorized, "Token expired")
     }
 
     suspend fun getAll() {
@@ -49,8 +51,9 @@ class NotesController(private val call: ApplicationCall) {
         if (TokenCheck.isTokenValid(token.orEmpty())) {
             val noteDTO = Notes.fetchAllByEmail(Tokens.fetchEmailByToken(token!!).get(0).email)
             call.respond(noteDTO)
-        } else {
-            call.respond(HttpStatusCode.Unauthorized, "Token expired")
+            return
         }
+
+        call.respond(HttpStatusCode.Unauthorized, "Token expired")
     }
 }
