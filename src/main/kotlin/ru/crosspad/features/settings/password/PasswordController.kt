@@ -1,4 +1,4 @@
-package ru.crosspad.features.password
+package ru.crosspad.features.settings.password
 
 import io.ktor.http.*
 import io.ktor.server.application.*
