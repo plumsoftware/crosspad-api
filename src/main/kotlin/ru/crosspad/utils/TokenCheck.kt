@@ -1,6 +1,6 @@
 package ru.crosspad.utils
 
-import ru.crosspad.database.tokens.Tokens
+import ru.crosspad.entity.Tokens
 
 object TokenCheck {
 

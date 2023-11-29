@@ -1,11 +1,12 @@
-package ru.crosspad.features.settings.password
+package ru.crosspad.controller
 
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
-import ru.crosspad.database.tokens.Tokens
-import ru.crosspad.database.users.Users
+import ru.crosspad.entity.Tokens
+import ru.crosspad.entity.Users
+import ru.crosspad.dto.ChangePasswordDTO
 import ru.crosspad.utils.TokenCheck
 import ru.crosspad.utils.checkPassword
 import ru.crosspad.utils.hashPassword
@@ -13,7 +14,7 @@ import ru.crosspad.utils.hashPassword
 class PasswordController(private val call: ApplicationCall) {
 
     suspend fun passwordChange() {
-        val request = call.receive<ChangePasswordRequest>()
+        val request = call.receive<ChangePasswordDTO>()
         val token = call.request.headers["Authorization"]
 
         if (!TokenCheck.isTokenValid(token.orEmpty())) {

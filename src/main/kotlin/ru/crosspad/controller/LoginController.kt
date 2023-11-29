@@ -1,12 +1,14 @@
-package ru.crosspad.features.login
+package ru.crosspad.controller
 
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
-import ru.crosspad.database.tokens.TokenDTO
-import ru.crosspad.database.tokens.Tokens
-import ru.crosspad.database.users.Users
+import ru.crosspad.dto.TokenDTO
+import ru.crosspad.entity.Tokens
+import ru.crosspad.entity.Users
+import ru.crosspad.dto.LoginReceiveRemote
+import ru.crosspad.dto.LoginResponseRemote
 import ru.crosspad.utils.checkPassword
 import java.util.*
 

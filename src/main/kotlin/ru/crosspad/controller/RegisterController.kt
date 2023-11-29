@@ -1,14 +1,16 @@
-package ru.crosspad.features.register
+package ru.crosspad.controller
 
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import org.jetbrains.exposed.exceptions.ExposedSQLException
-import ru.crosspad.database.tokens.TokenDTO
-import ru.crosspad.database.tokens.Tokens
-import ru.crosspad.database.users.UserDTO
-import ru.crosspad.database.users.Users
+import ru.crosspad.dto.TokenDTO
+import ru.crosspad.entity.Tokens
+import ru.crosspad.dto.UserDTO
+import ru.crosspad.entity.Users
+import ru.crosspad.dto.RegisterReceiveRemote
+import ru.crosspad.dto.RegisterResponseRemote
 import ru.crosspad.utils.hashPassword
 import ru.crosspad.utils.isValidEmail
 import java.util.*

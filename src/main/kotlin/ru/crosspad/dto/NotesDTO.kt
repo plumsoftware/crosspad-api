@@ -1,8 +1,7 @@
-package ru.crosspad.database.notes
+package ru.crosspad.dto
 
 import kotlinx.serialization.Serializable
-import ru.crosspad.features.note.models.CreateNoteRequest
-import ru.crosspad.features.note.models.CreateNoteResponse
+import ru.crosspad.entity.Notes
 
 @Serializable
 data class NotesDTO(

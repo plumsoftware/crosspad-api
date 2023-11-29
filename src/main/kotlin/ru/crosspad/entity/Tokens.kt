@@ -1,7 +1,8 @@
-package ru.crosspad.database.tokens
+package ru.crosspad.entity
 
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
+import ru.crosspad.dto.TokenDTO
 
 
 object Tokens : Table("tokens") {

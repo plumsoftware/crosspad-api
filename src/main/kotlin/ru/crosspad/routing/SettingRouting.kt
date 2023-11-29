@@ -1,7 +1,8 @@
-package ru.crosspad.features.settings
+package ru.crosspad.routing
 
 import io.ktor.server.application.*
 import io.ktor.server.routing.*
+import ru.crosspad.controller.SettingsController
 
 fun Application.configureSettingsRouting() {
     routing {

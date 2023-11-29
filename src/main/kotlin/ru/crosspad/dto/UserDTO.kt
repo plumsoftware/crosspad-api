@@ -1,4 +1,4 @@
-package ru.crosspad.database.users
+package ru.crosspad.dto
 
 class UserDTO(
     var email: String,

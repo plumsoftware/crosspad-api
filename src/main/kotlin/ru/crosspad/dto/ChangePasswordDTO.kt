@@ -1,9 +1,9 @@
-package ru.crosspad.features.settings.password
+package ru.crosspad.dto
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ChangePasswordRequest(
+data class ChangePasswordDTO(
     val oldPassword: String,
     val newPassword: String
 )

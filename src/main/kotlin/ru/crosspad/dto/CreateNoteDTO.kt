@@ -1,4 +1,4 @@
-package ru.crosspad.features.note.models
+package ru.crosspad.dto
 
 import kotlinx.serialization.Serializable
 
