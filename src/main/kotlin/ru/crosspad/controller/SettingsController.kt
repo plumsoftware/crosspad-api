@@ -1,9 +1,9 @@
-package ru.crosspad.features.settings
+package ru.crosspad.controller
 
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
-import ru.crosspad.database.tokens.Tokens
+import ru.crosspad.entity.Tokens
 import ru.crosspad.utils.TokenCheck
 
 class SettingsController(private val call: ApplicationCall) {

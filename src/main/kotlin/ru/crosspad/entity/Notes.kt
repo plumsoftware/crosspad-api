@@ -1,7 +1,8 @@
-package ru.crosspad.database.notes
+package ru.crosspad.entity
 
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
+import ru.crosspad.dto.NotesDTO
 
 object Notes : Table("notes") {
     private val noteId = Notes.integer("id")

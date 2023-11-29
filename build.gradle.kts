@@ -43,23 +43,23 @@ dependencies {
     implementation("org.mindrot:jbcrypt:0.4")
 }
 
-ktor {
-    fatJar {
-        archiveFileName.set("fat.jar")
-    }
-
-    docker {
-        jreVersion.set(JavaVersion.VERSION_17)
-        localImageName.set("sample-docker-image")
-        imageTag.set("0.0.1-preview")
-        portMappings.set(
-            listOf(
-                io.ktor.plugin.features.DockerPortMapping(
-                    80,
-                    8080,
-                    io.ktor.plugin.features.DockerPortMappingProtocol.TCP
-                )
-            )
-        )
-    }
-}
+//ktor {
+//    fatJar {
+//        archiveFileName.set("fat.jar")
+//    }
+//
+//    docker {
+//        jreVersion.set(JavaVersion.VERSION_17)
+//        localImageName.set("sample-docker-image")
+//        imageTag.set("0.0.1-preview")
+//        portMappings.set(
+//            listOf(
+//                io.ktor.plugin.features.DockerPortMapping(
+//                    80,
+//                    8080,
+//                    io.ktor.plugin.features.DockerPortMappingProtocol.TCP
+//                )
+//            )
+//        )
+//    }
+//}

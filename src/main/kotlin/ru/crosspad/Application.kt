@@ -4,11 +4,11 @@ import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import org.jetbrains.exposed.sql.Database
-import ru.crosspad.features.login.configureLoginRouting
-import ru.crosspad.features.note.configureNotesRouting
-import ru.crosspad.features.settings.password.configurePasswordRouting
-import ru.crosspad.features.register.configureRegisterRouting
-import ru.crosspad.features.settings.configureSettingsRouting
+import ru.crosspad.routing.configureLoginRouting
+import ru.crosspad.routing.configureNotesRouting
+import ru.crosspad.routing.configurePasswordRouting
+import ru.crosspad.routing.configureRegisterRouting
+import ru.crosspad.routing.configureSettingsRouting
 import ru.crosspad.plugins.configureRouting
 import ru.crosspad.plugins.configureSerialization
 

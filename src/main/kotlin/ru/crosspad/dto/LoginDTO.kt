@@ -1,4 +1,4 @@
-package ru.crosspad.features.login
+package ru.crosspad.dto
 
 import kotlinx.serialization.Serializable
 

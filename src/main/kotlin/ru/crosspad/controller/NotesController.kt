@@ -1,21 +1,21 @@
-package ru.crosspad.features.note
+package ru.crosspad.controller
 
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
-import ru.crosspad.database.notes.Notes
-import ru.crosspad.database.notes.mapToCreateNoteResponse
-import ru.crosspad.database.notes.mapToNoteDTO
-import ru.crosspad.database.tokens.Tokens
-import ru.crosspad.features.note.models.CreateNoteRequest
-import ru.crosspad.features.note.models.SearchNoteRequest
+import ru.crosspad.entity.Notes
+import ru.crosspad.dto.mapToCreateNoteResponse
+import ru.crosspad.dto.mapToNoteDTO
+import ru.crosspad.entity.Tokens
+import ru.crosspad.dto.CreateNoteRequest
+import ru.crosspad.dto.SearchNoteDTO
 import ru.crosspad.utils.TokenCheck
 
 class NotesController(private val call: ApplicationCall) {
 
     suspend fun getByTitle() {
-        val request = call.receive<SearchNoteRequest>()
+        val request = call.receive<SearchNoteDTO>()
         val token = call.request.headers["Authorization"]
 
         if (TokenCheck.isTokenValid(token.orEmpty())) {

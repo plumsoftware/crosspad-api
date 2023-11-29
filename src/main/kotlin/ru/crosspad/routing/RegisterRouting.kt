@@ -1,7 +1,8 @@
-package ru.crosspad.features.register
+package ru.crosspad.routing
 
 import io.ktor.server.application.*
 import io.ktor.server.routing.*
+import ru.crosspad.controller.RegisterController
 
 fun Application.configureRegisterRouting() {
     routing {
