@@ -1,4 +1,4 @@
-package ru.crosspad.dto
+package ru.crosspad.model.dto
 
 import kotlinx.serialization.Serializable
 

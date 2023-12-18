@@ -1,4 +1,4 @@
-package ru.crosspad.dto
+package ru.crosspad.model.dto
 
 class TokenDTO(
     val id: Int,

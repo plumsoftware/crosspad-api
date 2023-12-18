@@ -5,12 +5,12 @@ import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import org.jetbrains.exposed.exceptions.ExposedSQLException
-import ru.crosspad.dto.TokenDTO
-import ru.crosspad.entity.Tokens
-import ru.crosspad.dto.UserDTO
-import ru.crosspad.entity.Users
-import ru.crosspad.dto.RegisterReceiveRemote
-import ru.crosspad.dto.RegisterResponseRemote
+import ru.crosspad.model.dto.TokenDTO
+import ru.crosspad.model.entity.Token
+import ru.crosspad.model.dto.UserDTO
+import ru.crosspad.model.entity.User
+import ru.crosspad.model.dto.RegisterReceiveRemote
+import ru.crosspad.model.dto.RegisterResponseRemote
 import ru.crosspad.utils.hashPassword
 import ru.crosspad.utils.isValidEmail
 import java.util.*
@@ -23,7 +23,7 @@ class RegisterController(private val call: ApplicationCall) {
             call.respond(HttpStatusCode.BadRequest, "Email is not valid")
         }
 
-        val userDTO = Users.fetchUser(registerReceiveRemote.email)
+        val userDTO = User.fetchUser(registerReceiveRemote.email)
 
         if (userDTO != null) {
             call.respond(HttpStatusCode.Conflict, "Email is already in use")
@@ -34,7 +34,7 @@ class RegisterController(private val call: ApplicationCall) {
         val hashedPassword = hashPassword(registerReceiveRemote.password)
 
         try {
-            Users.insert(
+            User.insert(
                 UserDTO(
                     email = registerReceiveRemote.email,
                     password = hashedPassword
@@ -44,9 +44,9 @@ class RegisterController(private val call: ApplicationCall) {
             call.respond(HttpStatusCode.Conflict, "Email is already in use")
         }
 
-        Tokens.insert(
+        Token.insert(
             TokenDTO(
-                id = Tokens.getLastIdFromDatabase() + 1,
+                id = Token.getLastIdFromDatabase() + 1,
                 email = registerReceiveRemote.email,
                 token = token
             )

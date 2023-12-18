@@ -14,12 +14,12 @@ import ru.crosspad.plugins.configureSerialization
 
 fun main() {
     Database.connect(
-        "jdbc:postgresql://db:5432/crosspad",
+        "jdbc:postgresql://localhost:5432/crosspad", //"jdbc:postgresql://db:5432/crosspad"
         "org.postgresql.Driver", "postgres", "root"
     )
 
 
-    embeddedServer(Netty, port = 8080, host = "0.0.0.0", module = Application::module)
+    embeddedServer(Netty, port = 8087, host = "0.0.0.0", module = Application::module)
         .start(wait = true)
 }
 

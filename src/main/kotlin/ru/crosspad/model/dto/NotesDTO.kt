@@ -1,7 +1,7 @@
-package ru.crosspad.dto
+package ru.crosspad.model.dto
 
 import kotlinx.serialization.Serializable
-import ru.crosspad.entity.Notes
+import ru.crosspad.model.entity.Note
 
 @Serializable
 data class NotesDTO(
@@ -15,7 +15,7 @@ data class NotesDTO(
 
 fun CreateNoteRequest.mapToNoteDTO(): NotesDTO =
     NotesDTO(
-        noteId = Notes.getLastIdFromDatabase() + 1,
+        noteId = Note.getLastIdFromDatabase() + 1,
         title = title,
         entry = entry,
         color = color,

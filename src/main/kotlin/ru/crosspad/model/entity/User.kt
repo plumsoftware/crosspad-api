@@ -1,19 +1,19 @@
-package ru.crosspad.entity
+package ru.crosspad.model.entity
 
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.jetbrains.exposed.sql.update
-import ru.crosspad.dto.UserDTO
+import ru.crosspad.model.dto.UserDTO
 
-object Users : Table("users") {
-    private val email = Users.varchar("email", 100)
-    private val password = Users.varchar("password", 100)
+object User : Table("users") {
+    private val email = User.varchar("email", 100)
+    private val password = User.varchar("password", 100)
 
     fun insert(userDTO: UserDTO) {
         transaction {
-            Users.insert {
+            User.insert {
                 it[email] = userDTO.email
                 it[password] = userDTO.password
             }
@@ -23,9 +23,9 @@ object Users : Table("users") {
     fun fetchUser(email: String): UserDTO? {
         return try {
             transaction {
-                val userModel = Users.select { Users.email.eq(email) }.single()
+                val userModel = User.select { User.email.eq(email) }.single()
                 UserDTO(
-                    email = userModel[Users.email],
+                    email = userModel[User.email],
                     password = userModel[password]
                 )
             }
@@ -37,7 +37,7 @@ object Users : Table("users") {
     fun getPasswordByEmail(emailSearch: String): String? {
         return try {
             transaction {
-                Users.select { email eq emailSearch }
+                User.select { email eq emailSearch }
                     .singleOrNull()
                     ?.get(password)
             }
@@ -48,9 +48,9 @@ object Users : Table("users") {
 
     fun passwordChange(emailSearch: String, newPassword: String): Boolean {
         return transaction {
-            val user = Users.select { email eq emailSearch }.singleOrNull()
+            val user = User.select { email eq emailSearch }.singleOrNull()
             if (user != null) {
-                Users.update({ email eq emailSearch }) {
+                User.update({ email eq emailSearch }) {
                     it[password] = newPassword
                 }
                 true

@@ -3,7 +3,7 @@ package ru.crosspad.controller
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
-import ru.crosspad.entity.Tokens
+import ru.crosspad.model.entity.Token
 import ru.crosspad.utils.TokenCheck
 
 class SettingsController(private val call: ApplicationCall) {
@@ -12,7 +12,7 @@ class SettingsController(private val call: ApplicationCall) {
         val token = call.request.headers["Authorization"]
 
         if (TokenCheck.isTokenValid(token.orEmpty())) {
-            val email = Tokens.fetchEmailByToken(token!!).get(0).email
+            val email = Token.fetchEmailByToken(token!!).get(0).email
             call.respond(email)
             return
         }

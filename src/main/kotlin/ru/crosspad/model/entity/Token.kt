@@ -1,18 +1,18 @@
-package ru.crosspad.entity
+package ru.crosspad.model.entity
 
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
-import ru.crosspad.dto.TokenDTO
+import ru.crosspad.model.dto.TokenDTO
 
 
-object Tokens : Table("tokens") {
-    private val id = Tokens.integer("id")
-    private val email = Tokens.varchar("email", 100)
-    private val token = Tokens.varchar("token", 100)
+object Token : Table("tokens") {
+    private val id = Token.integer("id")
+    private val email = Token.varchar("email", 100)
+    private val token = Token.varchar("token", 100)
 
     fun insert(tokenDTO: TokenDTO) {
         transaction {
-            Tokens.insert {
+            Token.insert {
                 it[id] = tokenDTO.id
                 it[email] = tokenDTO.email
                 it[token] = tokenDTO.token
@@ -23,10 +23,10 @@ object Tokens : Table("tokens") {
     fun fetchTokens(): List<TokenDTO> {
         return try {
             transaction {
-                Tokens.selectAll().toList()
+                Token.selectAll().toList()
                     .map {
                         TokenDTO(
-                            id = it[Tokens.id],
+                            id = it[Token.id],
                             email = it[email],
                             token = it[token]
                         )
@@ -40,10 +40,10 @@ object Tokens : Table("tokens") {
     fun fetchEmailByToken(tokenSearch: String): List<TokenDTO> {
         return try {
             transaction {
-                Tokens.select { token eq tokenSearch }.toList()
+                Token.select { token eq tokenSearch }.toList()
                     .map {
                         TokenDTO(
-                            id = it[Tokens.id],
+                            id = it[Token.id],
                             token = it[token],
                             email = it[email]
                         )
@@ -58,8 +58,8 @@ object Tokens : Table("tokens") {
         var lastId = 0
 
         transaction {
-            val result = Tokens.slice(Tokens.id.max()).select { Tokens.id.isNotNull() }.singleOrNull()
-            lastId = result?.get(Tokens.id.max()) as? Int ?: 0
+            val result = Token.slice(Token.id.max()).select { Token.id.isNotNull() }.singleOrNull()
+            lastId = result?.get(Token.id.max()) as? Int ?: 0
         }
 
         return lastId

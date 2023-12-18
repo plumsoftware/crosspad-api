@@ -1,14 +1,14 @@
-package ru.crosspad.dto
+package ru.crosspad.model.dto
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class RegisterReceiveRemote(
+data class LoginReceiveRemote(
     val email: String,
     val password: String
 )
 
 @Serializable
-data class RegisterResponseRemote(
+data class LoginResponseRemote(
     val token: String
 )

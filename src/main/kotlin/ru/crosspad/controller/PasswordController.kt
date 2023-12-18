@@ -4,9 +4,9 @@ import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
-import ru.crosspad.entity.Tokens
-import ru.crosspad.entity.Users
-import ru.crosspad.dto.ChangePasswordDTO
+import ru.crosspad.model.entity.Token
+import ru.crosspad.model.entity.User
+import ru.crosspad.model.dto.ChangePasswordDTO
 import ru.crosspad.utils.TokenCheck
 import ru.crosspad.utils.checkPassword
 import ru.crosspad.utils.hashPassword
@@ -25,8 +25,8 @@ class PasswordController(private val call: ApplicationCall) {
         val oldPassword = request.oldPassword
         val newPassword = request.newPassword
 
-        val email = Tokens.fetchEmailByToken(token!!).get(0).email
-        val password = Users.getPasswordByEmail(email)
+        val email = Token.fetchEmailByToken(token!!).get(0).email
+        val password = User.getPasswordByEmail(email)
 
         val hashedPassword = hashPassword(newPassword)
         if (!checkPassword(oldPassword, password!!)) {
@@ -34,7 +34,7 @@ class PasswordController(private val call: ApplicationCall) {
             return
         }
 
-        Users.passwordChange(email, hashedPassword)
+        User.passwordChange(email, hashedPassword)
         call.respond(HttpStatusCode.OK)
     }
 }

@@ -1,20 +1,20 @@
-package ru.crosspad.entity
+package ru.crosspad.model.entity
 
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
-import ru.crosspad.dto.NotesDTO
+import ru.crosspad.model.dto.NotesDTO
 
-object Notes : Table("notes") {
-    private val noteId = Notes.integer("id")
-    private val title = Notes.varchar("title", 50)
-    private val entry = Notes.varchar("entry", 3000)
-    private val color = Notes.varchar("color", 20)
-    private val email = Notes.varchar("email", 100)
-    private val date = Notes.long("date")
+object Note : Table("notes") {
+    private val noteId = Note.integer("id")
+    private val title = Note.varchar("title", 50)
+    private val entry = Note.varchar("entry", 3000)
+    private val color = Note.varchar("color", 20)
+    private val email = Note.varchar("email", 100)
+    private val date = Note.long("date")
 
     fun insert(notesDTO: NotesDTO) {
         transaction {
-            Notes.insert {
+            Note.insert {
                 it[noteId] = notesDTO.noteId
                 it[title] = notesDTO.title
                 it[entry] = notesDTO.entry
@@ -28,7 +28,7 @@ object Notes : Table("notes") {
     fun fetchAllByEmail(emailSearch: String): List<NotesDTO> {
         return try {
             transaction {
-                Notes.select { email eq emailSearch }.toList()
+                Note.select { email eq emailSearch }.toList()
                     .map {
                         NotesDTO(
                             noteId = it[noteId],
@@ -48,7 +48,7 @@ object Notes : Table("notes") {
     fun fetchAllByTitle(titleSearch: String, emailSearch: String): List<NotesDTO> {
         return try {
             transaction {
-                Notes.select { (email eq emailSearch) and (title eq titleSearch) }.toList()
+                Note.select { (email eq emailSearch) and (title eq titleSearch) }.toList()
                     .map {
                         NotesDTO(
                             noteId = it[noteId],
@@ -69,7 +69,7 @@ object Notes : Table("notes") {
         var lastId = 0
 
         transaction {
-            val result = Notes.slice(noteId.max()).select { noteId.isNotNull() }.singleOrNull()
+            val result = Note.slice(noteId.max()).select { noteId.isNotNull() }.singleOrNull()
             lastId = result?.get(noteId.max()) as? Int ?: 0
         }
 
